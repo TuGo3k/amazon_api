@@ -7,9 +7,9 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     });
 
-    console.log(`MongoDB холбогдлоо : ${conn.connection.host}`);
+    console.log(`MongoDB холбогдлоо : ${conn.connection.host}`.cyan.underline.bold);
   } catch (error) {
-    console.error(`MongoDB холболтын алдаа: ${error.message}`);
+    console.error(`MongoDB холболтын алдаа: ${error.message}`.red.underline.bold);
     process.exit(1); // Exit process if connection fails
   }
 };

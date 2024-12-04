@@ -6,7 +6,9 @@ var morgan = require('morgan')
 var path = require('path')
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
-// const morgan = require('morgan')
+const colors = require("colors");
+
+
 // Load environment variables
 dotenv.config({ path: "./config/config.env" });
 
@@ -19,7 +21,6 @@ var accessLogStream = rfs.createStream('access.log', {
 connectDB();
 
 const app = express();
-
 
 
 // Body parser middleware
@@ -41,11 +42,11 @@ const PORT = process.env.PORT || 5000;
 
 const server = app.listen(
   PORT,
-  console.log(`Express сервер ${PORT} порт дээр ажиллаж байна.`)
+  console.log(`Express сервер ${PORT} порт дээр ажиллаж байна.`.rainbow)
 );
 
 process.on('unhandledRejection', (err, promise) => {
-  console.log(`Алдаа гарлаа: ${err.message}`);
+  console.log(`Алдаа гарлаа: ${err.message}`.red.underline.bold);
   server.close(() =>
   process.exit(1))
 })
