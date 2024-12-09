@@ -1,4 +1,5 @@
 const Category = require("../models/Category");
+const myError = require("../utils/myError");
 
 exports.getCategories = async (req, res, next) => {
   try {
@@ -9,10 +10,7 @@ exports.getCategories = async (req, res, next) => {
       data: categories,
     });
   } catch (err) {
-    res.status(400).json({
-      succes: false,
-      error: err,
-    });
+    next(err);
   }
 };
 exports.getCategory = async (req, res, next) => {
@@ -20,21 +18,14 @@ exports.getCategory = async (req, res, next) => {
     const category = await Category.findById(req.params.id);
 
     if (!category) {
-      return res.status(400).json({
-        success: false,
-        error: req.params.id + " ID-тэй категори байхгүй.",
-      });
+      throw new myError(req.params.id + " ID-тэй категори байхгүй.", 400)
     }
-
     res.status(200).json({
       success: true,
       data: category,
     });
   } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: err,
-    });
+  next(err);
   }
 };
 exports.createCategory = async (req, res, next) => {
@@ -48,21 +39,41 @@ exports.createCategory = async (req, res, next) => {
       data: category,
     });
   } catch (err) {
-    res.status(400).json({
-      succes: false,
-      error: err.message,
-    });
+   next(err);
   }
 };
-exports.updateCategory = (req, res, next) => {
-  res.status(200).json({
-    succes: true,
-    data: `${req.params.id} id тай категорийг өөрчилнө`,
-  });
+exports.updateCategory = async(req, res, next) => {
+  try {
+    const category = await Category.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!category) {
+      throw new myError(req.params.id + " ID-тэй категори байхгүй.", 400)
+    }
+
+    res.status(200).json({
+      success: true,
+      data: category,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
-exports.deleteCategory = (req, res, next) => {
-  res.status(200).json({
-    succes: true,
-    data: `${req.params.id} id тай категорийг устгана`,
-  });
+exports.deleteCategory = async (req, res, next) => {
+  try {
+    const category = await Category.findByIdAndDelete(req.params.id);
+
+    if (!category) {
+      throw new myError(req.params.id + " ID-тэй категори байхгүй.", 400)
+    }
+
+    res.status(200).json({
+      success: true,
+      data: category,
+    });
+  } catch (err) {
+    next(err);
+  }
 };

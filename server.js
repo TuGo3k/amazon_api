@@ -1,42 +1,41 @@
 const express = require("express");
 const dotenv = require("dotenv");
-var fs = require('fs')
-var rfs = require('rotating-file-stream')
-var morgan = require('morgan')
-var path = require('path')
+var fs = require("fs");
+var rfs = require("rotating-file-stream");
+var morgan = require("morgan");
+var path = require("path");
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
 const colors = require("colors");
-
-
-// Load environment variables
-dotenv.config({ path: "./config/config.env" });
-
-var accessLogStream = rfs.createStream('access.log', {
-  interval: '1d', // rotate daily
-  path: path.join(__dirname, 'log')
-})
-
-// Connect to MongoDB
-connectDB();
-
-const app = express();
-
-
-// Body parser middleware
-app.use(express.json());
-
-
-
-app.use(logger);
-// setup the logger
-app.use(morgan('combined', { stream: accessLogStream }))
+const errorHandler = require("./middleware/error");
 
 // Import routes
 const categoriesRoutes = require("./routes/categories");
 
+const app = express();
+
+// Load environment variables
+dotenv.config({ path: "./config/config.env" });
+
+// Connect to MongoDB
+connectDB();
+
+var accessLogStream = rfs.createStream("access.log", {
+  interval: "1d", // rotate daily
+  path: path.join(__dirname, "log"),
+});
+
+// Body parser middleware
+app.use(express.json());
+
+app.use(logger);
+// setup the logger
+app.use(morgan("combined", { stream: accessLogStream }));
+
 // Mount routes
 app.use("/api/v1/categories", categoriesRoutes);
+
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;
 
@@ -45,8 +44,7 @@ const server = app.listen(
   console.log(`Express сервер ${PORT} порт дээр ажиллаж байна.`.rainbow)
 );
 
-process.on('unhandledRejection', (err, promise) => {
+process.on("unhandledRejection", (err, promise) => {
   console.log(`Алдаа гарлаа: ${err.message}`.red.underline.bold);
-  server.close(() =>
-  process.exit(1))
-})
+  server.close(() => process.exit(1));
+});
