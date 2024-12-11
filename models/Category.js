@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { transliteration, slugify } = require("transliteration")
 
 const CategorySchema = new mongoose.Schema({
   name: {
@@ -23,13 +24,21 @@ const CategorySchema = new mongoose.Schema({
   averageRating: {
     type: Number,
     min: [1, "Рэйтинг хамгийн багадаа 1 байх ёстой"],
-    max: [1, "Рэйтинг хамгийн ихдээ 10 байх ёстой"],
+    max: [10, "Рэйтинг хамгийн ихдээ 10 байх ёстой"],
   },
   averagePrice: Number,
   createdAt: {
     type: Date,
     default: Date.now,
   },
+  slug: {
+    type: String,
+  },
+});
+//    slugify
+CategorySchema.pre("save", function (next) {
+  this.slug = slugify(this.name)
+  next();
 });
 
 // ("моделын нэр" + ямар schema ашиглахийг зааж өгнө)
