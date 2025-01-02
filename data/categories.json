@@ -5,7 +5,8 @@
         "description": "Орчин үеийн програмчлалыг эндээс үзээрэй",
         "photo": "lit123.jpg",
         "createdAt": "2024-12-09T05:59:29.643Z",
-        "__v": 0
+        "__v": 0,
+        "slug": "programchlal"
     },
     {
         "_id": "675933beaee42d3fb8d9c51c",
@@ -13,6 +14,34 @@
         "description": "Дэлхийн сонгодог зохиолуудыг эндээс үзээрэй",
         "photo": "no-photo.jpg",
         "createdAt": "2024-12-11T06:39:58.385Z",
+        "__v": 0,
+        "slug": "shinzhleh-uhaan"
+    },
+    {
+        "_id": "677632ad146f5448bde68544",
+        "name": "Анагаах ухаан",
+        "description": "Дэлхийн сонгодог зохиолуудыг эндээс үзээрэй",
+        "photo": "no-photo.jpg",
+        "createdAt": "2025-01-02T06:31:09.747Z",
+        "slug": "anagaah-uhaan",
+        "__v": 0
+    },
+    {
+        "_id": "677632bf146f5448bde68546",
+        "name": "Хүн орчин",
+        "description": "Дэлхийн сонгодог зохиолуудыг эндээс үзээрэй",
+        "photo": "no-photo.jpg",
+        "createdAt": "2025-01-02T06:31:27.055Z",
+        "slug": "hun-orchin",
+        "__v": 0
+    },
+    {
+        "_id": "677632cd146f5448bde68548",
+        "name": "Нийгмийн ухаан",
+        "description": "Дэлхийн сонгодог зохиолуудыг эндээс үзээрэй",
+        "photo": "no-photo.jpg",
+        "createdAt": "2025-01-02T06:31:41.697Z",
+        "slug": "niygmiyn-uhaan",
         "__v": 0
     }
 ]

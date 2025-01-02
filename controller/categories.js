@@ -3,7 +3,7 @@ const myError = require("../utils/myError");
 // const asyncHandler = require("../middleware/asyncHandler");
 const asyncHandler = require("express-async-handler");
 exports.getCategories = asyncHandler(async (req, res, next) => {
-  const categories = await Category.find();
+  const categories = await Category.find(req.query);
 
   res.status(200).json({
     succes: true,
