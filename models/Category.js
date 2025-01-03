@@ -34,7 +34,15 @@ const CategorySchema = new mongoose.Schema({
   slug: {
     type: String,
   },
-});
+},{toJSON:{virtuals: true}, toObject : {virtuals: true}});
+
+CategorySchema.virtual('books', {ref: 'Book',
+  localField: '_id',
+  foreignField: 'category',
+  justOne: false
+})
+
+
 //    slugify
 CategorySchema.pre("save", function (next) {
   this.slug = slugify(this.name)

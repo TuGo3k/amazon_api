@@ -37,7 +37,7 @@ const BookSchema = new mongoose.Schema({
     trim: true,
     maxlenght: [5000, "Номын тайлбар дээд тал нь 5000 байх ёстой"],
   },
-  bestsell: {
+  bestseller: {
     type: Boolean,
     default: false,
   },
@@ -51,7 +51,17 @@ const BookSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+},{toJSON:{virtuals: true}, toObject : {virtuals: true}}
+);
+
+  BookSchema.virtual('zohiogch').get(function(){
+    // this.author
+    let tokens = this.author.split(' ')
+    if(tokens.length == 1) tokens = this.author.split('.')
+    if(tokens.length == 2) return tokens[1]
+    return tokens[0]
+
+  })
 
 // ("моделын нэр" + ямар schema ашиглахийг зааж өгнө)
 module.exports = mongoose.model("Book", BookSchema);

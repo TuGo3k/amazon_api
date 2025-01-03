@@ -11,6 +11,7 @@ const errorHandler = require("./middleware/error");
 
 // Import routes
 const categoriesRoutes = require("./routes/categories");
+const booksRoutes = require("./routes/books");
 
 const app = express();
 
@@ -34,6 +35,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 // Mount routes
 app.use("/api/v1/categories", categoriesRoutes);
+app.use("/api/v1/books", booksRoutes);
 
 app.use(errorHandler)
 
