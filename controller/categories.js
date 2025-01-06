@@ -74,11 +74,13 @@ exports.updateCategory = asyncHandler(async (req, res, next) => {
   });
 });
 exports.deleteCategory = asyncHandler(async (req, res, next) => {
-  const category = await Category.findByIdAndDelete(req.params.id);
+  const category = await Category.findById(req.params.id);
 
   if (!category) {
     throw new myError(req.params.id + " ID-тэй категори байхгүй.", 400);
   }
+
+  await category.deleteOne();
 
   res.status(200).json({
     success: true,

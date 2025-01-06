@@ -43,6 +43,12 @@ CategorySchema.virtual('books', {ref: 'Book',
 })
 
 
+CategorySchema.pre("deleteOne", { document: true, query: false }, async function (next) {
+  console.log("removing.........");
+  await this.model('Book').deleteMany({ category: this._id });
+  next();
+});
+
 //    slugify
 CategorySchema.pre("save", function (next) {
   this.slug = slugify(this.name)
