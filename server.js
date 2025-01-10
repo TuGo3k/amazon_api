@@ -6,9 +6,10 @@ var morgan = require("morgan");
 var path = require("path");
 const connectDB = require("./config/db");
 const logger = require("./middleware/logger");
+
 const colors = require("colors");
 const errorHandler = require("./middleware/error");
-
+const fileupload = require('express-fileupload')
 // Import routes
 const categoriesRoutes = require("./routes/categories");
 const booksRoutes = require("./routes/books");
@@ -28,6 +29,7 @@ var accessLogStream = rfs.createStream("access.log", {
 
 // Body parser middleware
 app.use(express.json());
+app.use(fileupload());
 
 app.use(logger);
 // setup the logger

@@ -18,7 +18,7 @@ mongoose.connect(process.env.MONGODB_URI)
 const importData = async () => {
   try {
     await Category.create(categories);
-    // await Book.create(books);
+    await Book.create(books);
     console.log("Өгөгдлийг импортоллоо...".green.inverse);
     process.exit();
   } catch (err) {

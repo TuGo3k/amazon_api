@@ -3,6 +3,8 @@ const errorHandler = (err, req, res, next) => {
 
     const error = { ...err}
 
+    error.message = err.message
+
     if(error.name === "CastError"){
         error.message = "Энэ ID буруу бүтэцтэй ID байна"
         error.statusCode = 400
