@@ -13,6 +13,7 @@ const fileupload = require('express-fileupload')
 // Import routes
 const categoriesRoutes = require("./routes/categories");
 const booksRoutes = require("./routes/books");
+const usersRoutes = require("./routes/users");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 // Mount routes
 app.use("/api/v1/categories", categoriesRoutes);
 app.use("/api/v1/books", booksRoutes);
+app.use("/api/v1/users", usersRoutes);
 
 app.use(errorHandler)
 

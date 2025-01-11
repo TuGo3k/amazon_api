@@ -3,31 +3,62 @@ const path = require("path");
 const Category = require("../models/Category");
 const myError = require("../utils/myError");
 const asyncHandler = require("express-async-handler");
+const paginate = require('../utils/paginate')
 
 // api/v1/books
 exports.getBooks = asyncHandler(async (req, res, next) => {
+ const page = parseInt(req.query.page) || 1;
 
-  const books = await Book.find().populate({
+  const limit = parseInt(req.query.limit) || 5;
+
+  const sort = req.query.sort;
+
+  const select = req.query.select;
+
+  ["select", "sort", "page", "limit"].forEach((el) => delete req.query[el]);
+  const start = (page - 1) * limit; // Corrected start calculation
+
+  const pagination = await paginate(page, limit, Book)
+
+  const books = await Book.find(req.query, select).populate({
     path: "category",
     select: "name averagePrice",
-  });;
+  }) .sort(sort)
+  .skip(pagination.start)
+  .limit(limit);
 
   res.status(200).json({
     success: true,
     count: books.length,
     data: books,
+    pagination
   });
 });
 
 // api/v1/categories/:categoryId/books
 exports.getCategoryBooks = asyncHandler(async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
 
-  const books = await Book.find({ category: req.params.categoryId });;
+  const limit = parseInt(req.query.limit) || 5;
+
+  const sort = req.query.sort;
+
+  const select = req.query.select;
+
+  ["select", "sort", "page", "limit"].forEach((el) => delete req.query[el]);
+  const start = (page - 1) * limit; // Corrected start calculation
+
+  const pagination = await paginate(page, limit, Book)
+//req.query, select
+  const books = await Book.find({...req.query, category: req.params.categoryId }, select) .sort(sort)
+  .skip(pagination.start)
+  .limit(limit);
 
   res.status(200).json({
     success: true,
     count: books.length,
     data: books,
+    pagination
   });
 });
 
