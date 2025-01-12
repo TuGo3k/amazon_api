@@ -110,10 +110,14 @@ exports.deleteBook = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateBook = asyncHandler(async (req, res, next) => {
+  
+  req.headers.authorization
+
   const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
+
 
   if (!book) {
     throw new myError(req.params.id + " ID-тэй ном байхгүй.", 400);

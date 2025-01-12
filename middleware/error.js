@@ -9,6 +9,10 @@ const errorHandler = (err, req, res, next) => {
         error.message = "Энэ ID буруу бүтэцтэй ID байна"
         error.statusCode = 400
     }
+    if(error.name === "JsonWebTokenError" && error.message === "invalid token"){
+        error.message = "Буруу токен дамжуулсан байна"
+        error.statusCode = 400
+    }
     if(error.code === 11000){
         error.message = "Энэ талбарын утгыг давхардуулж өгч болохгүй"
         error.statusCode = 400
