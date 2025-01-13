@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: String,
     required: [true, "Хэрэглэгчийн эрхийг оруулна уу"],
-    enum: ["user", "operator"],
+    enum: ["user", "operator","admin"],
     default: "user",
   },
   password: {
@@ -42,7 +42,7 @@ UserSchema.pre("save", async function () {
 });
 
 UserSchema.methods.getJsonWebToken = function () {
-  const token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+  const token = jwt.sign({ id: this._id, role: this.role }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRESIN,
   });
   return token;

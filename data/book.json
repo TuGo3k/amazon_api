@@ -12,6 +12,10 @@
     "new",
     "pdf"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "675933beaee42d3fb8d9c51c"
     },
     {
@@ -28,6 +32,8 @@
     "old",
     "kindle"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "675933beaee42d3fb8d9c51c"
     },
     {
@@ -43,6 +49,8 @@
     "new",
     "old"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "675933beaee42d3fb8d9c51c"
     },
     {
@@ -60,6 +68,8 @@
     "kindle",
     "pdf"
     ],
+    "createUser": "678390d328ccb12234a9da13",
+    "updateUser": "678390d328ccb12234a9da13",
     "category": "675933beaee42d3fb8d9c51c"
     },
     {
@@ -74,6 +84,8 @@
     "available": [
     "pdf"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e9047fd49941f52dcb01b35"
     },
     {
@@ -89,6 +101,8 @@
     "kindle",
     "pdf"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e9047fd49941f52dcb01b35"
     },
     {
@@ -103,6 +117,8 @@
     "available": [
     "new"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e9047fd49941f52dcb01b35"
     },
     {
@@ -118,6 +134,8 @@
     "new",
     "old"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e9047fd49941f52dcb01b35"
     },
     {
@@ -132,6 +150,8 @@
     "available": [
     "new"
     ],
+    "createUser": "678390d328ccb12234a9da13",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e90434cd433fa11b078ed8a"
     },
     {
@@ -149,6 +169,8 @@
     "kindle",
     "pdf"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e90434cd433fa11b078ed8a"
     },
     {
@@ -166,6 +188,8 @@
     "kindle",
     "pdf"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e90434cd433fa11b078ed8a"
     },
     {
@@ -181,6 +205,8 @@
     "new",
     "kindle"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e90434cd433fa11b078ed8a"
     },
     {
@@ -198,6 +224,8 @@
     "kindle",
     "pdf"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "678390d328ccb12234a9da13",
     "category": "5e90434cd433fa11b078ed8a"
     },
     {
@@ -215,6 +243,8 @@
     "kindle",
     "pdf"
     ],
+    "createUser": "6784f57d9c62dcf29cd8b769",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e90478549941f52dcb01b34"
     },
     {
@@ -230,6 +260,8 @@
     "available": [
     "old"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "6784f57d9c62dcf29cd8b769",
     "category": "5e90478549941f52dcb01b34"
     },
     {
@@ -245,6 +277,8 @@
     "kindle",
     "pdf"
     ],
+    "createUser": "6784f57d9c62dcf29cd8b769",
+    "updateUser": "6784f57d9c62dcf29cd8b769",
     "category": "5e90478549941f52dcb01b34"
     },
     {
@@ -261,6 +295,8 @@
     "new",
     "pdf"
     ],
+    "createUser": "67838a5d0b0629abc3847f5b",
+    "updateUser": "67838a5d0b0629abc3847f5b",
     "category": "5e90478549941f52dcb01b34"
     },
     {
@@ -275,6 +311,8 @@
     "available": [
     "old"
     ],
+    "createUser": "6784f57d9c62dcf29cd8b769",
+    "updateUser": "6784f57d9c62dcf29cd8b769",
     "category": "5e90478549941f52dcb01b34"
     }
     ]

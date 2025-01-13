@@ -1,0 +1,23 @@
+[
+    {
+        "_id": "67838a5d0b0629abc3847f5b",
+        "name": "Амараа",
+        "email": "admin@gmail.com",
+        "role": "admin",
+        "password": "1234"
+    },
+    {
+        "_id": "678390d328ccb12234a9da13",
+        "name": "Сараа",
+        "email": "op@gmail.com",
+        "role": "operator",
+        "password": "1234"
+    },
+    {
+        "_id": "6784f57d9c62dcf29cd8b769",
+        "name": "Болдоо",
+        "email": "user@gmail.com",
+        "role": "user",
+        "password": "1234"
+    }
+]

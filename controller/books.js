@@ -3,11 +3,12 @@ const path = require("path");
 const Category = require("../models/Category");
 const myError = require("../utils/myError");
 const asyncHandler = require("express-async-handler");
-const paginate = require('../utils/paginate')
+const paginate = require("../utils/paginate");
+const User = require("../models/User");
 
 // api/v1/books
 exports.getBooks = asyncHandler(async (req, res, next) => {
- const page = parseInt(req.query.page) || 1;
+  const page = parseInt(req.query.page) || 1;
 
   const limit = parseInt(req.query.limit) || 5;
 
@@ -18,20 +19,54 @@ exports.getBooks = asyncHandler(async (req, res, next) => {
   ["select", "sort", "page", "limit"].forEach((el) => delete req.query[el]);
   const start = (page - 1) * limit; // Corrected start calculation
 
-  const pagination = await paginate(page, limit, Book)
+  const pagination = await paginate(page, limit, Book);
 
-  const books = await Book.find(req.query, select).populate({
-    path: "category",
-    select: "name averagePrice",
-  }) .sort(sort)
-  .skip(pagination.start)
-  .limit(limit);
+  const books = await Book.find(req.query, select)
+    .populate({
+      path: "category",
+      select: "name averagePrice",
+    })
+    .sort(sort)
+    .skip(pagination.start)
+    .limit(limit);
 
   res.status(200).json({
     success: true,
     count: books.length,
     data: books,
-    pagination
+    pagination,
+  });
+});
+exports.getUserBooks = asyncHandler(async (req, res, next) => {
+  const page = parseInt(req.query.page) || 1;
+
+  const limit = parseInt(req.query.limit) || 5;
+
+  const sort = req.query.sort;
+
+  const select = req.query.select;
+
+  ["select", "sort", "page", "limit"].forEach((el) => delete req.query[el]);
+  const start = (page - 1) * limit; // Corrected start calculation
+
+  const pagination = await paginate(page, limit, Book);
+
+  req.query.createUser = req.userId;
+
+  const books = await Book.find(req.query, select)
+    .populate({
+      path: "category",
+      select: "name averagePrice",
+    })
+    .sort(sort)
+    .skip(pagination.start)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    count: books.length,
+    data: books,
+    pagination,
   });
 });
 
@@ -48,20 +83,23 @@ exports.getCategoryBooks = asyncHandler(async (req, res, next) => {
   ["select", "sort", "page", "limit"].forEach((el) => delete req.query[el]);
   const start = (page - 1) * limit; // Corrected start calculation
 
-  const pagination = await paginate(page, limit, Book)
-//req.query, select
-  const books = await Book.find({...req.query, category: req.params.categoryId }, select) .sort(sort)
-  .skip(pagination.start)
-  .limit(limit);
+  const pagination = await paginate(page, limit, Book);
+  //req.query, select
+  const books = await Book.find(
+    { ...req.query, category: req.params.categoryId },
+    select
+  )
+    .sort(sort)
+    .skip(pagination.start)
+    .limit(limit);
 
   res.status(200).json({
     success: true,
     count: books.length,
     data: books,
-    pagination
+    pagination,
   });
 });
-
 
 exports.getBook = asyncHandler(async (req, res, next) => {
   const book = await Book.findById(req.params.id);
@@ -86,6 +124,8 @@ exports.createBook = asyncHandler(async (req, res, next) => {
     throw new myError(req.body.category + " ID-тэй категори байхгүй.", 400);
   }
 
+  req.body.createUser = req.userId;
+
   const book = await Book.create(req.body);
 
   res.status(200).json({
@@ -100,24 +140,23 @@ exports.deleteBook = asyncHandler(async (req, res, next) => {
   if (!book) {
     throw new myError(req.params.id + " ID-тэй категори байхгүй.", 400);
   }
-
+  const user = User.findById(req.userId);
   await book.deleteOne();
 
   res.status(200).json({
     success: true,
     data: book,
+    whoDeleted: user.name,
   });
 });
 
 exports.updateBook = asyncHandler(async (req, res, next) => {
-  
-  req.headers.authorization
+  req.body.updateUser = req.userId;
 
   const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true,
   });
-
 
   if (!book) {
     throw new myError(req.params.id + " ID-тэй ном байхгүй.", 400);
@@ -158,8 +197,8 @@ exports.uploadBookPhoto = asyncHandler(async (req, res, next) => {
       );
     }
 
-    book.photo = file.name
-    book.save()
+    book.photo = file.name;
+    book.save();
 
     res.status(200).json({
       succes: true,
