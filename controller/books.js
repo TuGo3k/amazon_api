@@ -138,8 +138,13 @@ exports.deleteBook = asyncHandler(async (req, res, next) => {
   const book = await Book.findById(req.params.id);
 
   if (!book) {
-    throw new myError(req.params.id + " ID-тэй категори байхгүй.", 400);
+    throw new myError(req.params.id + " ID-тэй ном байхгүй.", 400);
   }
+
+  if(book.createUser.toString() !== req.userId && req.userRole !== 'admin'){
+    throw new myError('Та зөвхөн өөрийнхөө номыг засварлах эрхтэй', 403)
+  }
+
   const user = User.findById(req.userId);
   await book.deleteOne();
 
@@ -151,16 +156,25 @@ exports.deleteBook = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateBook = asyncHandler(async (req, res, next) => {
-  req.body.updateUser = req.userId;
-
-  const book = await Book.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  
+  const book = await Book.findById(req.params.id);
 
   if (!book) {
     throw new myError(req.params.id + " ID-тэй ном байхгүй.", 400);
   }
+  
+  if(book.createUser.toString() !== req.userId && req.userRole !== 'admin'){
+    throw new myError('Та зөвхөн өөрийнхөө номыг засварлах эрхтэй', 403)
+  }
+
+  req.body.updateUser = req.userId;
+
+  for(let attr in req.body){
+    book[attr] = req.body[attr]
+  }
+  
+book.save()
+
 
   res.status(200).json({
     success: true,
