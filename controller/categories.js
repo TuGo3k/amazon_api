@@ -2,6 +2,9 @@ const Category = require("../models/Category");
 const myError = require("../utils/myError");
 const asyncHandler = require("express-async-handler");
 const paginate = require('../utils/paginate')
+
+
+
 exports.getCategories = asyncHandler(async (req, res, next) => {
   const page = parseInt(req.query.page) || 1;
 

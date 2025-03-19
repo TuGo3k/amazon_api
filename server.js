@@ -9,16 +9,19 @@ const logger = require("./middleware/logger");
 
 const colors = require("colors");
 const errorHandler = require("./middleware/error");
-const fileupload = require('express-fileupload')
+const fileupload = require("express-fileupload");
 // Import routes
 const categoriesRoutes = require("./routes/categories");
 const booksRoutes = require("./routes/books");
 const usersRoutes = require("./routes/users");
+const injectDb = require("./middleware/injectDb");
 
 const app = express();
 
 // Load environment variables
 dotenv.config({ path: "./config/config.env" });
+
+const db = require("./config/db-mysql");
 
 // Connect to MongoDB
 connectDB();
@@ -34,6 +37,7 @@ app.use(express.json());
 app.use(fileupload());
 
 app.use(logger);
+app.use(injectDb(db));
 // setup the logger
 app.use(morgan("combined", { stream: accessLogStream }));
 
@@ -41,8 +45,14 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use("/api/v1/categories", categoriesRoutes);
 app.use("/api/v1/books", booksRoutes);
 app.use("/api/v1/users", usersRoutes);
+app.use(errorHandler);
 
-app.use(errorHandler)
+db.sequelize
+  .sync()
+  .then((result) => {
+    console.log("sync хийгдлээ...".green);
+  })
+  .catch((err) => console.log(err));
 
 const PORT = process.env.PORT || 5000;
 
