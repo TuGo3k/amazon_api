@@ -33,6 +33,20 @@ exports.getCategories = asyncHandler(async (req, res, next) => {
 });
 
 exports.getCategory = asyncHandler(async (req, res, next) => {
+
+req.db.teacher.create({
+  id: 2,
+  name: 'Нараа',
+  phone: '89840107',
+  password: '1234'
+})
+req.db.course.create({
+  id: 1,
+  name: 'C++ алгоритм',
+  price: '32000',
+  tailbar: 'Програмчлалын курс',
+})
+
   const category = await Category.findById(req.params.id).populate(
     'books'
   )

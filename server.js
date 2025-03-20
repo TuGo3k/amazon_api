@@ -37,6 +37,7 @@ app.use(express.json());
 app.use(fileupload());
 
 app.use(logger);
+// injectDb middleware-р db-г бүх route-д дамжуулж байна
 app.use(injectDb(db));
 // setup the logger
 app.use(morgan("combined", { stream: accessLogStream }));
@@ -47,8 +48,12 @@ app.use("/api/v1/books", booksRoutes);
 app.use("/api/v1/users", usersRoutes);
 app.use(errorHandler);
 
+db.teacher.belongsToMany(db.course, { through: "teacher_course" });
+db.course.belongsToMany(db.teacher, { through: "teacher_course" });
+
+// db-mysql-д зарласан db.sequelize = sequelize энд ашиглаж дараа нь db.sequelize.sync() хийгээд database руу холбож өгнө
 db.sequelize
-  .sync()
+  .sync({ force: true })
   .then((result) => {
     console.log("sync хийгдлээ...".green);
   })
