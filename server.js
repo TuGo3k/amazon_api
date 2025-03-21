@@ -14,6 +14,7 @@ const fileupload = require("express-fileupload");
 const categoriesRoutes = require("./routes/categories");
 const booksRoutes = require("./routes/books");
 const usersRoutes = require("./routes/users");
+const commentsRoutes = require("./routes/comments");
 const injectDb = require("./middleware/injectDb");
 
 const app = express();
@@ -46,14 +47,17 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use("/api/v1/categories", categoriesRoutes);
 app.use("/api/v1/books", booksRoutes);
 app.use("/api/v1/users", usersRoutes);
+app.use("/api/v1/comments", commentsRoutes);
 app.use(errorHandler);
 
-db.teacher.belongsToMany(db.course, { through: "teacher_course" });
-db.course.belongsToMany(db.teacher, { through: "teacher_course" });
+db.user.belongsToMany(db.book, { through: "comment" });
+db.book.belongsToMany(db.user, { through: "comment" });
+db.category.hasMany(db.book);
+db.book.belongsTo(db.category);
 
 // db-mysql-д зарласан db.sequelize = sequelize энд ашиглаж дараа нь db.sequelize.sync() хийгээд database руу холбож өгнө
 db.sequelize
-  .sync({ force: true })
+  .sync()
   .then((result) => {
     console.log("sync хийгдлээ...".green);
   })

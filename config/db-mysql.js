@@ -27,8 +27,10 @@ const sequelize = new Sequelize(
 
 // db-тэй холбох процесс
 const models = [
-    require('../models/sequelize/Course'),
-    require('../models/sequelize/Teacher'),
+    require('../models/sequelize/book'),
+    require('../models/sequelize/user'),
+    require('../models/sequelize/category'),
+    require('../models/sequelize/comment'),
 ]
 // давталт
 models.forEach(model => {

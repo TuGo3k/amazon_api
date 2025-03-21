@@ -1,31 +1,31 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('urdun_comment', {
+  return sequelize.define('category', {
     id: {
       autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
+      type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
     },
-    urdun_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false
-    },
-    ognoo: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
     ner: {
-      type: DataTypes.STRING(150),
-      allowNull: true
+      type: DataTypes.STRING(45),
+      allowNull: false
     },
-    comment: {
-      type: DataTypes.STRING(450),
-      allowNull: true
+    aver_price: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    aver_rate: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    categorycol: {
+      type: DataTypes.STRING(45),
+      allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'urdun_comment',
+    tableName: 'category',
     timestamps: false,
     timestamp: false,
     indexes: [

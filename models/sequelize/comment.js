@@ -1,24 +1,36 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('urdun_category_link', {
+  return sequelize.define('comment', {
+    userId: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: 'user',
+        key: 'id'
+      }
+    },
+    bookId: {
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      references: {
+        model: 'book',
+        key: 'id'
+      }
+    },
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true
     },
-    urdun_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false
-    },
-    cat_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+    comment: {
+      type: DataTypes.STRING(450),
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'urdun_category_link',
-    timestamps: false,
+    tableName: 'comment',
+    timestamps: true,
     timestamp: false,
     indexes: [
       {
@@ -30,17 +42,17 @@ module.exports = function(sequelize, DataTypes) {
         ]
       },
       {
-        name: "Index_2",
+        name: "id_idx",
         using: "BTREE",
         fields: [
-          { name: "cat_id" },
+          { name: "userId" },
         ]
       },
       {
-        name: "Index_3",
+        name: "FK_comment_2_idx",
         using: "BTREE",
         fields: [
-          { name: "urdun_id" },
+          { name: "bookId" },
         ]
       },
     ]

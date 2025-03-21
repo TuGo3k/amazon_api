@@ -1,23 +1,27 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('urdun_buteegdehuun', {
+  return sequelize.define('book', {
     id: {
       autoIncrement: true,
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true
     },
-    urdun_id: {
+    name: {
+      type: DataTypes.STRING(45),
+      allowNull: false
+    },
+    une: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false
     },
-    buteegdehuun_id: {
-      type: DataTypes.INTEGER.UNSIGNED,
+    create_date: {
+      type: DataTypes.DATE,
       allowNull: false
     }
   }, {
     sequelize,
-    tableName: 'urdun_buteegdehuun',
+    tableName: 'book',
     timestamps: false,
     timestamp: false,
     indexes: [
@@ -27,20 +31,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "id" },
-        ]
-      },
-      {
-        name: "Index_2",
-        using: "BTREE",
-        fields: [
-          { name: "buteegdehuun_id" },
-        ]
-      },
-      {
-        name: "Index_3",
-        using: "BTREE",
-        fields: [
-          { name: "urdun_id" },
         ]
       },
     ]
