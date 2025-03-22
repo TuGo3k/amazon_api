@@ -70,15 +70,15 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 
   const pagination = await paginate(page, limit, req.db.comment);
 
-//   const comments = await req.db.comment
-//     .findAll(req.query)
+  const comments = await req.db.comment
+    .findAll()
     // .sort(sort)
     // .skip(pagination.start)
     // .limit(limit);
 
   res.status(200).json({
     success: true,
-    // data: comments,
-    pagination,
+    data: req.query,
+    // pagination,
   });
 });

@@ -1,6 +1,12 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('comment', {
+       id: {
+      autoIncrement: true,
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: false,
+      primaryKey: true
+    },
     userId: {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
@@ -17,12 +23,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'id'
       }
     },
-    id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-      primaryKey: true
-    },
+ 
     comment: {
       type: DataTypes.STRING(450),
       allowNull: false

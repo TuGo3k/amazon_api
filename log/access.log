@@ -796,3 +796,8 @@
 ::1 - - [21/Mar/2025:09:52:32 +0000] "DELETE /api/v1/comments/2 HTTP/1.1" 400 70 "-" "PostmanRuntime/7.43.2"
 ::1 - - [21/Mar/2025:10:10:07 +0000] "GET /api/v1/comments?select=name%20price&sort=-price&price[$lt]=30000&page=1 HTTP/1.1" 404 154 "-" "PostmanRuntime/7.43.2"
 ::1 - - [21/Mar/2025:10:33:03 +0000] "GET /api/v1/comments?select=name%20price&sort=-price&price[$lt]=30000&page=1 HTTP/1.1" 200 83 "-" "PostmanRuntime/7.43.2"
+::1 - - [22/Mar/2025:05:49:30 +0000] "POST /api/v1/comments/ HTTP/1.1" 500 41 "-" "PostmanRuntime/7.43.2"
+::1 - - [22/Mar/2025:06:47:41 +0000] "GET /api/v1/comments?select=name%20price&sort=-price&price[$lt]=30000&page=1 HTTP/1.1" 200 97 "-" "PostmanRuntime/7.43.2"
+::1 - - [22/Mar/2025:06:50:42 +0000] "GET /api/v1/comments?select=name%20price&sort=-price&price[$lt]=30000&page=1 HTTP/1.1" 200 2660 "-" "PostmanRuntime/7.43.2"
+::1 - - [22/Mar/2025:06:52:42 +0000] "GET /api/v1/comments?select=name%20price&sort=-price&price[$lt]=30000&page=1 HTTP/1.1" 200 2660 "-" "PostmanRuntime/7.43.2"
+::1 - - [22/Mar/2025:06:54:06 +0000] "GET /api/v1/comments?select=name%20price&sort=-price&price[$lt]=30000&page=1 HTTP/1.1" 200 49 "-" "PostmanRuntime/7.43.2"

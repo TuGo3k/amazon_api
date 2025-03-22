@@ -23,6 +23,7 @@ const app = express();
 dotenv.config({ path: "./config/config.env" });
 
 const db = require("./config/db-mysql");
+const { FORCE } = require("sequelize/lib/index-hints");
 
 // Connect to MongoDB
 connectDB();
