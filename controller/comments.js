@@ -62,7 +62,11 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 
   const sort = req.query.sort;
 
-  const select = req.query.select;
+  let select = req.query.select;
+
+  if (select) {
+    select = select.split(" ");
+  }
 
   ["select", "sort", "page", "limit"].forEach((el) => delete req.query[el]);
 
@@ -70,15 +74,26 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 
   const pagination = await paginate(page, limit, req.db.comment);
 
-  const comments = await req.db.comment
-    .findAll()
-    // .sort(sort)
-    // .skip(pagination.start)
-    // .limit(limit);
+  let query = {};
+
+  if (req.query) {
+    query.where = req.query;
+  }
+
+  if (select) {
+    query.attributes = select;
+  }
+
+  const comments = await req.db.comment.findAll(query);
+  // .sort(sort)
+  // .skip(pagination.start)
+  // .limit(limit);
 
   res.status(200).json({
     success: true,
-    data: req.query,
+    // array: arr,
+    data: query,
+    comments,
     // pagination,
   });
 });
