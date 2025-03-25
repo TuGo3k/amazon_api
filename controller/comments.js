@@ -74,7 +74,7 @@ exports.getComments = asyncHandler(async (req, res, next) => {
 
   const pagination = await paginate(page, limit, req.db.comment);
 
-  let query = {};
+  let query = {offset: pagination.start-1, limit };
 
   if (req.query) {
     query.where = req.query;
